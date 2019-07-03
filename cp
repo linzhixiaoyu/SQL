@@ -37,3 +37,13 @@ plot(nn)
 pred <- predict(nn, test)
 table(test$y == '1', pred[ ,1] > 0.5)
 confusionMatrix(table(test$y == 1, pred[,1]> 0.45))
+
+
+-----predict in logit
+#Prediction
+plogit <- predict(logit, type = 'response')
+summary(plogit)
+#Confusion matrix (0.5 threshold) with accuracy, 95% CI, P_Value, sensitivity, specificity, pos pred value, neg pred value, prevalence, detection rate, balanced accuracy
+library(caret)
+library(e1070)
+confusionMatrix(table(true = mydata$y, pred = round(fitted(logit))), threshold = 0.5)
